@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidLayoutBasics</string>
+    <string name="main_hello_world_txt">Hola Mundo!!!!</string>
+
+</resources>
