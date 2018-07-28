@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">AndroidLayoutBasics</string>
     <string name="main_hello_world_txt">Hola Mundo!!!!</string>
-
+    <string name="secondary_hello">¿Cómo están?</string>
 </resources>

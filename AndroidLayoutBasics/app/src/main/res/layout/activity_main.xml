@@ -6,13 +6,58 @@
     android:layout_height="match_parent"
     tools:context="mx.mobilestudio.androidlayoutbasics.MainActivity"
     >
-
+    <!-- Centro Centro-->
     <TextView
+        android:id="@+id/centro_centro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="@string/main_hello_world_txt" />
+    <!-- Centro Centro Abajo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/centro_centro"
+    <!-- Alineado a la izquierda del texto -->
+        android:layout_alignLeft="@id/centro_centro"
+        android:text="1234567890"
+        />
+    <!-- Superior Derecha -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:text="@string/main_hello_world_txt"
         />
+    <!-- Superior Centro -->
+    <TextView
+        android:id="@+id/superior_centro_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/main_hello_world_txt" />
+    <!-- Superior Centro Mensaje alineado -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/superior_centro_horizontal"
+        android:text="2.-"
+        />
+    <!-- Superior Izquierda -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/main_hello_world_txt"
+        />
+    <!-- Inferior Izquierda -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/main_hello_world_txt"
+        />
+    <!-- Inferior Centro -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,26 +65,45 @@
         android:layout_alignParentBottom="true"
         android:text="@string/main_hello_world_txt"
         />
+    <!-- Inferior Derecha -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:text="@string/main_hello_world_txt"
         />
-
+    <!-- Central Izquierda -->
     <TextView
+        android:id="@+id/izquierda_central"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:text="@string/main_hello_world_txt"
         />
-
+    <!-- Central Izquierda Abajo-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentStart="true"
-        android:text="@string/main_hello_world_txt"
+        android:layout_below="@id/izquierda_central"
+        android:text="@string/secondary_hello"
+        />
+    <!-- Central Vertical Derecha -->
+    <TextView
+        android:id="@+id/centro_vertical_derecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/main_hello_world_txt" />
+    <!-- Central Vertical Derecha Arriba-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/centro_vertical_derecha"
+        android:layout_alignRight="@id/centro_vertical_derecha"
+        android:text="@string/secondary_hello"
         />
 
     <!-- MATCH PARENT = ADAPTATE AL CONTENEDOR (Tamaño de la pantalla del teléfono) -->
