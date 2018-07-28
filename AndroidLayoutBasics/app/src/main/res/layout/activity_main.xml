@@ -8,6 +8,7 @@
     <!-- MATCH PARENT = ADAPTATE AL CONTENEDOR (Tamaño de la pantalla del telefono)   -->
 
     <TextView
+        android:id="@+id/center_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -15,6 +16,7 @@
     <!-- WRAP CONTENT = ADAPTATE AL CONTENIDO  -->
 
     <TextView
+        android:id="@+id/top_center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -30,10 +32,11 @@
     <!-- WRAP CONTENT = ADAPTATE AL CONTENIDO  -->
 
     <TextView
+        android:id="@+id/center_vertical_align_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:text="@string/main_hello_world_txt" />
     <!-- WRAP CONTENT = ADAPTATE AL CONTENIDO  -->
 
@@ -45,5 +48,58 @@
         android:layout_alignParentBottom="true"
         android:text="@string/main_hello_world_txt" />
     <!-- WRAP CONTENT = ADAPTATE AL CONTENIDO  -->
-as
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/main_hello_world_txt" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/main_hello_world_txt" />
+
+    <TextView
+        android:id="@+id/izquierda_centrado_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@string/main_hello_world_txt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/izquierda_centrado_vertical"
+        android:text="@string/secondary_hello" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/center_center"
+        android:layout_alignLeft="@+id/center_center"
+        android:text="@string/secondary_hello" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/center_vertical_align_right"
+        android:layout_alignLeft="@id/center_vertical_align_right"
+        android:text="@string/secondary_hello" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/top_center_horizontal"
+        android:text="@string/secondary_hello" />
+
+
 </RelativeLayout>
