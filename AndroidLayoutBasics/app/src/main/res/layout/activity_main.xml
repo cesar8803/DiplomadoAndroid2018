@@ -7,29 +7,39 @@
     tools:context="mx.mobilestudio.androidlayoutbasics.MainActivity">
 
     <TextView
+        android:id="@+id/centro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_centerInParent="true"
 
-        android:text="@string/main_hello_world_txt"
-
- />
+        android:text="morado" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:text="@string/main_hello_world_txt"
+        android:text="mundo"
 
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+
+        android:text="casa"
+
+        />
+
+    <TextView
+        android:id="@+id/derechaarriba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
 
-        android:text="@string/main_hello_world_txt"
+        android:text="suprimir"
 
         />
 
@@ -39,25 +49,90 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
 
-        android:text="@string/main_hello_world_txt"
+        android:text="jalar"
 
         />
 
     <TextView
+        android:id="@+id/izqcentro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_centerVertical="true"
 
-        android:text="@string/main_hello_world_txt"
+        android:text="encarga" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="saluda"
 
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="omelet"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:text="naranja"
+
+        />
 
 
-        android:text="@string/main_hello_world_txt"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/izqcentro"
+        android:text="naranja"
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/centro"
+        android:layout_centerHorizontal="true"
+        android:text="naranjota"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/centro"
+        android:layout_centerVertical="true"
+
+        android:text="fruta "
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/centro"
+        android:layout_alignParentRight="true"
+        android:text="vegetales"
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/derechaarriba"
+        android:text="batman "
 
         />
 
