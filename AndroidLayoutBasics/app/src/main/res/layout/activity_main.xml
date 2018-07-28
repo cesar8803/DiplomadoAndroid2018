@@ -18,11 +18,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/centro_centro"
-    <!-- Alineado a la izquierda del texto -->
         android:layout_alignLeft="@id/centro_centro"
         android:text="1234567890"
         />
-    <!-- Superior Derecha -->
+    <!-- Mensaje alineado -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/main_hello_world_txt"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
