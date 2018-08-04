@@ -21,7 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondaryActivity"></activity>
+        <activity android:name=".SecondaryActivity">
+
+        </activity>
+
     </application>
 
 </manifest>
+<!--    CON ESTAS LINEAS DECLARO QUE PANTALLA ES LA PRINCIPAL
+ <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>       -->
