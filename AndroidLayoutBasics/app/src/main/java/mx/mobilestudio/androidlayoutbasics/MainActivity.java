@@ -1,5 +1,6 @@
 package mx.mobilestudio.androidlayoutbasics;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(this,"Se le dio Click",Toast.LENGTH_LONG).show();
         center_center_tv.setText("asdasdasdasdasdasd");
+
+        Intent intent_pantalla_secundaria = new Intent(this, SecondaryActivity.class);
+
+        startActivity(intent_pantalla_secundaria);
 
 
     }
