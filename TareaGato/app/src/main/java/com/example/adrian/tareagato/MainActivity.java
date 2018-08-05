@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bo1.setOnClickListener(this);
     }
     @Override
-    public void OnClick(View view){
-        if (view.getId()==R.id.B1){
+    public void onClick(View view){
+        if (view.getId()==R.id.B1 && Bo1.getText().toString() !="x") {
+            Bo1.setText("x");
             Toast.makeText(this, "Se le dio Click gordo", Toast.LENGTH_LONG).show();
 
         }
