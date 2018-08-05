@@ -19,21 +19,21 @@
         android:id="@+id/B1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B1"
+        android:text=""
         android:layout_weight="1"/>
 
     <Button
         android:id="@+id/B2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B2"
+        android:text=""
         android:layout_weight="1"/>
 
     <Button
         android:id="@+id/B3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B3"
+        android:text=""
         android:layout_weight="1"/>
 </LinearLayout>
 
@@ -49,21 +49,21 @@
         android:id="@+id/B4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B4"
+        android:text=""
         android:layout_weight="1"/>
 
     <Button
         android:id="@+id/B5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B5"
+        android:text=""
         android:layout_weight="1"/>
 
     <Button
         android:id="@+id/B6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B6"
+        android:text=""
         android:layout_weight="1"/>
 
 
@@ -83,14 +83,14 @@
             android:id="@+id/B7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="B7"
+            android:text=""
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/B8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="B8"
+            android:text=""
             android:layout_weight="1"/>
 
         <Button
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="B9"
+            android:text=""
             />
     </LinearLayout>
 
