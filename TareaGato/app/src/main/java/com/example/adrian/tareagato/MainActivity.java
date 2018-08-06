@@ -27,6 +27,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numerador7;
     private int numerador8;
     private int numerador9;
+    private int numerador1b;
+    private int numerador2b;
+    private int numerador3b;
+    private int numerador4b;
+    private int numerador5b;
+    private int numerador6b;
+    private int numerador7b;
+    private int numerador8b;
+    private int numerador9b;
 
 
     @Override
@@ -101,44 +110,96 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bo9.setText("X");
             numerador++;
             numerador9=1;
-        }else if(view.getId()==R.id.B1 && numerador==1 && numerador1 != 1){
+        }else if(view.getId()==R.id.B1 && numerador==1 && numerador1 != 1 && numerador1b !=1){
             Bo1.setText("O");
             --numerador;
             numerador1=1;
-        }else if (view.getId()==R.id.B2 && numerador==1 && numerador2 != 1 ){
+            numerador1b=1;
+        }else if (view.getId()==R.id.B2 && numerador==1 && numerador2 != 1 && numerador2b!=1 ){
             Bo2.setText("O");
             --numerador;
             numerador2=1;
-        }else if (view.getId()==R.id.B3 && numerador==1 && numerador3 !=1){
+            numerador2b=1;
+        }else if (view.getId()==R.id.B3 && numerador==1 && numerador3 !=1 && numerador3!=1){
             Bo3.setText("O");
             --numerador;
             numerador3=1;
-        }else if (view.getId()==R.id.B4 && numerador==1 && numerador4 !=1){
+            numerador3b=1;
+        }else if (view.getId()==R.id.B4 && numerador==1 && numerador4 !=1 && numerador4b!=1){
             Bo4.setText("O");
             --numerador;
             numerador4=1;
-        }else if (view.getId()==R.id.B5 && numerador==1 && numerador5 !=1){
+            numerador4b=1;
+        }else if (view.getId()==R.id.B5 && numerador==1 && numerador5 !=1 && numerador5!=1){
             Bo5.setText("O");
             --numerador;
             numerador5=1;
-        }else if (view.getId()==R.id.B6 && numerador==1 && numerador6 !=1){
+            numerador5b=1;
+        }else if (view.getId()==R.id.B6 && numerador==1 && numerador6 !=1 && numerador6b!=1){
             Bo6.setText("O");
             --numerador;
             numerador6=1;
-        }else if (view.getId()==R.id.B7 && numerador==1 && numerador7 !=1){
+            numerador6b=1;
+        }else if (view.getId()==R.id.B7 && numerador==1 && numerador7 !=1 && numerador7!=1){
             Bo7.setText("O");
             --numerador;
             numerador7=1;
-        }else if (view.getId()==R.id.B8 && numerador==1 && numerador8 !=1){
+            numerador7b=1;
+        }else if (view.getId()==R.id.B8 && numerador==1 && numerador8 !=1 && numerador8b!=1){
             Bo8.setText("O");
             --numerador;
             numerador8=1;
-        }else if (view.getId()==R.id.B9 && numerador==1 && numerador9!=1){
+            numerador8b=1;
+        }else if (view.getId()==R.id.B9 && numerador==1 && numerador9!=1 && numerador9!=1){
             Bo9.setText("O");
             --numerador;
             numerador9=1;
+            numerador9b=1;
         }
-        System.out.println(numerador);
+        System.out.println(numerador2b);
+        System.out.println(numerador3b);
+        System.out.println(numerador4b);
+        System.out.println(numerador7b);
+
+        if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador2==1 && numerador3==1){
+            Bo1.setText("WINNER");
+            Bo2.setText("WINNER");
+            Bo3.setText("WINNER");
+        }  else if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador4==1 && numerador7==1
+                && numerador2b!=1 && numerador3b !=1 && numerador4b !=1 && numerador7b!= 1){
+            Bo1.setText("WINNER");
+            Bo4.setText("WINNER");
+            Bo7.setText("WINNER");
+        }else if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador5==1 && numerador9==1){
+            Bo1.setText("WINNER");
+            Bo5.setText("WINNER");
+            Bo9.setText("WINNER");
+        }else if (view.getId()==R.id.B7 && numerador==1 && numerador7==1 && numerador4==1 && numerador1==1
+                && numerador1b!=1 && numerador4b !=1 && numerador8b !=1 && numerador9b!= 1){
+            Bo7.setText("WINNER");
+            Bo4.setText("WINNER");
+            Bo1.setText("WINNER");
+        }  else if (view.getId()==R.id.B7 && numerador==1 && numerador7==1 && numerador8==1 && numerador9==1){
+            Bo7.setText("WINNER");
+            Bo8.setText("WINNER");
+            Bo9.setText("WINNER");
+        }else if (view.getId()==R.id.B7 && numerador==1 && numerador7==1 && numerador5==1 && numerador3==1){
+            Bo7.setText("WINNER");
+            Bo5.setText("WINNER");
+            Bo3.setText("WINNER");
+        }else if (view.getId()==R.id.B3 && numerador==1 && numerador3==1 && numerador6==1 && numerador9==1){
+            Bo3.setText("WINNER");
+            Bo6.setText("WINNER");
+            Bo9.setText("WINNER");
+        } else if (view.getId()==R.id.B3 && numerador==1 && numerador3==1 && numerador2==1 && numerador1==1){
+            Bo3.setText("WINNER");
+            Bo2.setText("WINNER");
+            Bo1.setText("WINNER");
+        }else if (view.getId()==R.id.B3 && numerador==1 && numerador3==1 && numerador5==1 && numerador7==1) {
+            Bo3.setText("WINNER");
+            Bo5.setText("WINNER");
+            Bo7.setText("WINNER");
+        }
 
     }
 }
