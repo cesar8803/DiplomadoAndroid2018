@@ -151,17 +151,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador2==1 && numerador3==1){
-            Bo1.setText("WINNE");
+            Bo1.setText("WINNER");
             Bo2.setText("WINNER");
             Bo3.setText("WINNER");
         }  else if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador4==1 && numerador7==1){
-            Bo1.setText("WINNE");
-            Bo4.setText("WINNE");
+            Bo1.setText("WINNER");
+            Bo4.setText("WINNER");
             Bo7.setText("WINNER");
         }else if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador5==1 && numerador9==1){
-            Bo1.setText("WINNE");
-            Bo5.setText("WINNE");
-            Bo9.setText("WINNE");
+            Bo1.setText("WINNER");
+            Bo5.setText("WINNER");
+            Bo9.setText("WINNER");
         }else if (view.getId()==R.id.B7 && numerador==1 && numerador7==1 && numerador4==1 && numerador1==1){
             Bo7.setText("WINNER");
             Bo4.setText("WINNER");
@@ -254,13 +254,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bo2.setText("WINNER");
             Bo3.setText("WINNER");
         }  else if (view.getId()==R.id.B1 && numerador==0 && numerador1b==1 && numerador4b==1 && numerador7b==1){
-            Bo1.setText("WINNE");
-            Bo4.setText("WINNE");
+            Bo1.setText("WINNER");
+            Bo4.setText("WINNER");
             Bo7.setText("WINNER");
         }else if (view.getId()==R.id.B1 && numerador==0 && numerador1b==1 && numerador5b==1 && numerador9b==1){
-            Bo1.setText("WINNE");
-            Bo5.setText("WINNE");
-            Bo9.setText("WINNE");
+            Bo1.setText("WINNER");
+            Bo5.setText("WINNER");
+            Bo9.setText("WINNER");
         }else if (view.getId()==R.id.B7 && numerador==0 && numerador7b==1 && numerador4b==1 && numerador1b==1){
             Bo7.setText("WINNER");
             Bo4.setText("WINNER");
