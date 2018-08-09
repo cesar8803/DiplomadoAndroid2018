@@ -1,5 +1,6 @@
 package com.example.adrian.tareagato;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -154,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bo1.setText("WINNER");
             Bo2.setText("WINNER");
             Bo3.setText("WINNER");
+
+            Intent segu = new Intent(MainActivity.this,Second.class);
+            startActivity(segu);
+
         }  else if (view.getId()==R.id.B1 && numerador==1 && numerador1==1 && numerador4==1 && numerador7==1){
             Bo1.setText("WINNER");
             Bo4.setText("WINNER");
