@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button Bo7;
     private Button Bo8;
     private Button Bo9;
+    private Button Rst;
     private int numerador;
     private int numerador1;
     private int numerador2;
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Bo9=findViewById(R.id.B9);
         Bo9.setOnClickListener(this);
+
+        Rst=findViewById(R.id.reset);
+        Rst.setOnClickListener(this);
 
 
     }
@@ -351,9 +355,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bo5.setText("WINNER");
             Bo7.setText("WINNER");
             }
-        System.out.println(numerador);
-        System.out.println(numerador1b);
-        System.out.println(numerador2b);
-        System.out.println(numerador3b);
+
+            if (view.getId()==R.id.reset){
+                Bo1.setText("Play again.");
+                Bo2.setText("Play again.");
+                Bo3.setText("Play again.");
+                Bo4.setText("Play again.");
+                Bo5.setText("Play again.");
+                Bo6.setText("Play again.");
+                Bo7.setText("Play again.");
+                Bo8.setText("Play again.");
+                Bo9.setText("Play again.");
+                numerador=0;
+                numerador1=0;
+                numerador2=0;
+                numerador3=0;
+                numerador4=0;
+                numerador5=0;
+                numerador6=0;
+                numerador7=0;
+                numerador8=0;
+                numerador9=0;
+                numerador1b=0;
+                numerador2b=0;
+                numerador3b=0;
+                numerador4b=0;
+                numerador5b=0;
+                numerador6b=0;
+                numerador7b=0;
+                numerador8b=0;
+                numerador9b=0;
+            }
+
         }
 }
