@@ -13,14 +13,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mobilestudiolaptop004.placefinder.model.ApiFourSquareResponse;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Response.Listener, Response.ErrorListener {
 //Volley --> libreria para trabajar http, esta es de google
 
     private Button boton1;
-    private Button boton2;
-
-
 
 
     @Override
@@ -61,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onResponse(Object response) {
         Toast.makeText(this,(String)response, Toast.LENGTH_LONG).show();
 
+        Gson gson = new Gson();
+        ApiFourSquareResponse apiFourSquareResponse=gson.fromJson((String) response, ApiFourSquareResponse.class);
+        Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(2).getName(),Toast.LENGTH_LONG).show();
     }
     //Este metodo es obligatorio
     @Override
