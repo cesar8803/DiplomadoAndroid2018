@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mx.mobilestudio.gatoandroid.MainActivity">
+    tools:context="mx.mobilestudio.gatoandroid.MainActivitngy">
 
     <Button
         android:id="@+id/button"
