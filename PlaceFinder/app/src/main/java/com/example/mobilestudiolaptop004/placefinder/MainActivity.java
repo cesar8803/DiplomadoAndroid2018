@@ -29,15 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         boton1= findViewById(R.id.B1);
         boton1.setOnClickListener(this);
-
-
     }
 
     @Override
     public void onClick(View view) {
         callFourSquareApi("gasolinera");
     }
-
 
     //Metodo para ejecutar el request HTTP mediante Volley
     public void callFourSquareApi(String query){
@@ -58,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Este metodo es obligatario
     @Override
     public void onResponse(Object response) {
-        Toast.makeText(this,(String)response, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,(String)response, Toast.LENGTH_LONG).show();
 
         Gson gson = new Gson();
         ApiFourSquareResponse apiFourSquareResponse=gson.fromJson((String) response, ApiFourSquareResponse.class);
-        Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(2).getName(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(1).getName(),Toast.LENGTH_LONG).show();
     }
     //Este metodo es obligatorio
     @Override

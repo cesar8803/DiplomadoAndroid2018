@@ -26,6 +26,7 @@ public class Locationf {
     }
 
 
+    
     private double lat;
     private double lng;
     private int distance;

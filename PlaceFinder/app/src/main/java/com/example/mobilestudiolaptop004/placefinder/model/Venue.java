@@ -3,6 +3,7 @@ package com.example.mobilestudiolaptop004.placefinder.model;
 public class Venue {
     private String id;
     private String name;
+    private Locationf location;
 
     public String getId() {
         return id;
@@ -28,5 +29,5 @@ public class Venue {
         this.location = location;
     }
 
-    private Locationf location;
+
 }
