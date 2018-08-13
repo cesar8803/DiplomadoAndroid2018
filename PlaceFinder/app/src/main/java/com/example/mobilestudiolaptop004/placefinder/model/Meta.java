@@ -1,6 +1,9 @@
 package com.example.mobilestudiolaptop004.placefinder.model;
 
 public class Meta {
+    private int code;
+    private String requestId;
+
     public int getCode() {
         return code;
     }
@@ -17,7 +20,6 @@ public class Meta {
         this.requestId = requestId;
     }
 
-    private int code;
-    private String requestId;
+
 
 }

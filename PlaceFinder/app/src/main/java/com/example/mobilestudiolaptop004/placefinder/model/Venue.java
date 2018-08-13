@@ -1,9 +1,12 @@
 package com.example.mobilestudiolaptop004.placefinder.model;
 
+import java.util.ArrayList;
+
 public class Venue {
     private String id;
     private String name;
     private Locationf location;
+
 
     public String getId() {
         return id;

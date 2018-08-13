@@ -1,6 +1,11 @@
 package com.example.mobilestudiolaptop004.placefinder.model;
 
 public class Locationf {
+
+    private double lat;
+    private double lng;
+    private int distance;
+
     public double getLat() {
         return lat;
     }
@@ -27,8 +32,6 @@ public class Locationf {
 
 
     
-    private double lat;
-    private double lng;
-    private int distance;
+
 
 }
