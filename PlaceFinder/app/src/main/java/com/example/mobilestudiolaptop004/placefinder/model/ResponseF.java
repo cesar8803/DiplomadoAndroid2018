@@ -2,6 +2,7 @@ package com.example.mobilestudiolaptop004.placefinder.model;
 
 import java.util.ArrayList;
 
+
 public class ResponseF {
 
     private ArrayList<Venue> venues; //en venue lo puedo llamar como quiera
@@ -15,6 +16,15 @@ public class ResponseF {
     }
 
 
+    private ArrayList<Categories> categories;
+
+    public ArrayList<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Categories> categories) {
+        this.categories = categories;
+    }
 
 }
 

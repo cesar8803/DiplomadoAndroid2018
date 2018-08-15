@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Gson gson = new Gson();
         ApiFourSquareResponse apiFourSquareResponse=gson.fromJson((String) response, ApiFourSquareResponse.class);
-        Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(0).getName(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(0).getId(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, apiFourSquareResponse.getResponse().getCategories().get(1).getIdc(),Toast.LENGTH_LONG).show();
     }
     //Este metodo es obligatorio
     @Override
