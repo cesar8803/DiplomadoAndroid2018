@@ -3,6 +3,7 @@ package mx.mobilestudio.placefinder;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,14 +18,18 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import mx.mobilestudio.placefinder.adapter.ListResultsAdapter;
 import mx.mobilestudio.placefinder.model.ApiFourSquareResponse;
+import mx.mobilestudio.placefinder.model.Venue;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener , Response.Listener ,Response.ErrorListener {
 
     private Button miBoton;
     private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
 
     @Override
@@ -34,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         miBoton = (Button) findViewById(R.id.button);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_results);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
 
         miBoton.setOnClickListener(this);
     }
@@ -80,7 +88,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(2).getName(),Toast.LENGTH_LONG).show();
 
-        ListResultsAdapter listResultsAdapter = new ListResultsAdapter();
+        List<Venue> venues = apiFourSquareResponse.getResponse().getVenues();
+
+        ListResultsAdapter listResultsAdapter = new ListResultsAdapter(venues);
+
+        recyclerView.setAdapter(listResultsAdapter);
     }
 
 
