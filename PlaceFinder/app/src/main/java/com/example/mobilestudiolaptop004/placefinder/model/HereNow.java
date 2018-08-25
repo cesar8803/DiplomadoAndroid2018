@@ -1,15 +1,20 @@
+
 package com.example.mobilestudiolaptop004.placefinder.model;
 
-public class HereNow {
-    private int countHN;
-    private String summary;
+import java.util.List;
 
-    public int getCountHN() {
-        return countHN;
+public class HereNow {
+
+    private Integer count;
+    private String summary;
+    private List<Group> groups = null;
+
+    public Integer getCount() {
+        return count;
     }
 
-    public void setCountHN(int countHN) {
-        this.countHN = countHN;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getSummary() {
@@ -20,5 +25,12 @@ public class HereNow {
         this.summary = summary;
     }
 
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
 
 }
