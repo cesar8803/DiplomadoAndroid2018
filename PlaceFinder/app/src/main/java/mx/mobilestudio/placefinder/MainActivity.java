@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.support.v7.widget.RecyclerView;
+
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,13 +17,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import mx.mobilestudio.placefinder.adapter.ListResultsAdapter;
 import mx.mobilestudio.placefinder.model.ApiFourSquareResponse;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener , Response.Listener ,Response.ErrorListener {
 
     private Button miBoton;
-    private Button miBoton2;
+    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         miBoton = (Button) findViewById(R.id.button);
-        miBoton2 = (Button) findViewById(R.id.button2);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_results);
 
         miBoton.setOnClickListener(this);
-        miBoton2.setOnClickListener(this);
     }
 
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Metodo para ejecutar el request HTTP mediante Volley
     public void callFourSquareApi(String  query) {
 
-        String location =  "19.395209"+","+"-99.1544203"; // HARDCODE
+        String location =  "19.433997"+","+"-99.146006"; // HARDCODE
 
         RequestQueue queue  = Volley.newRequestQueue(this);
 
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ApiFourSquareResponse apiFourSquareResponse = gson.fromJson((String) response, ApiFourSquareResponse.class);
 
         Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(2).getName(),Toast.LENGTH_LONG).show();
+
+        ListResultsAdapter listResultsAdapter = new ListResultsAdapter();
     }
 
 
