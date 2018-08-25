@@ -39,4 +39,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
           }
 
     }
+
+    // Metodo para ejecutar el request HTTP mediante Volley
+    public void callFourSquareApi(String query) {
+        String location = "19.395209" + "," + "-99.1544203"; // HARDCODE
+        RequestQueue queue = Volley.newRequestQueue(context:this);
+
+        // Uri.parse: Clase JAVA para interpretar URL con signos y caract. especiales
+
+        String URL = Uri.parse("https://api.foursquare.com/v2/venues/search").buildupon()
+                .appendQueryParameter("client_id", "")
+                .appendQueryParameter("client_secret", "")
+                .appendQueryParameter("v","20130815")
+                .appendQueryParameter("ll", location)
+
+    }
 }
