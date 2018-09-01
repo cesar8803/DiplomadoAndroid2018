@@ -9,5 +9,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        public void callLiverAPI(String query){
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String URL = Uri.parse("https://api.myjson.com/bins/r882c").buildUpon();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET,URL, this,this);
+            queue.add(stringRequest);
+
+        }
+
+
+
+
     }
 }
