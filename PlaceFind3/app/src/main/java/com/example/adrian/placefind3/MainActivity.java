@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(this,"Yeah Budy!!!",Toast.LENGTH_LONG).show();
+
         callLiverpoolAPI();
     }
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Toast.makeText(this,"Yeah Budy!!!",Toast.LENGTH_LONG).show();
     }
 
     @Override

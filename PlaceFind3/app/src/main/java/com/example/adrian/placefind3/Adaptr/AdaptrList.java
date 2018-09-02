@@ -33,8 +33,8 @@ public class AdaptrList extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((MyViewHolder)holder).tit.setText(stores.get(position).getTitulo());
-        ((MyViewHolder)holder).dir.setText(stores.get(position).getDireccion());
-        ((MyViewHolder)holder).ubi.setText(stores.get(position).getCcubicacion());
+        //((MyViewHolder)holder).dir.setText(stores.get(position).getDireccion());
+        //((MyViewHolder)holder).ubi.setText(stores.get(position).getCcubicacion());
     }
 
     @Override
@@ -47,14 +47,14 @@ public class AdaptrList extends RecyclerView.Adapter {
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView tit;
-        public TextView dir;
-        public TextView ubi;
+        //public TextView dir;
+        //public TextView ubi;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tit=itemView.findViewById(R.id.tit);
-            dir=itemView.findViewById(R.id.dir);
-            ubi=itemView.findViewById(R.id.ubi);
+            //dir=itemView.findViewById(R.id.dir);
+            //ubi=itemView.findViewById(R.id.ubi);
         }
     }
 
