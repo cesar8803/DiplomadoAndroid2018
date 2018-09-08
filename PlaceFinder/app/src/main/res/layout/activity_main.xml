@@ -6,13 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
+        >
+        <ImageButton
+            android:id="@+id/mybuttonmap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_dialog_map"/>
+    </android.support.v7.widget.Toolbar>
+
     <Button
         android:id="@+id/B1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="FourSquare" />
+        android:text="Search"
+        android:layout_below="@+id/my_toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/main_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/B1"
+        android:background="@android:color/holo_blue_bright"
+        >
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_results"
@@ -20,6 +44,18 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_below="@id/B1"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_marginEnd="41dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Que estas buscando"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_toRightOf="@id/B1"/>
 
 
 </RelativeLayout>
