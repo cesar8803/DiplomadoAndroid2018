@@ -22,12 +22,15 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import static java.lang.String.valueOf;
+
 public class ActividadPrincipal extends AppCompatActivity implements View.OnClickListener, Response.Listener, Response.ErrorListener{
     private Button utton1;
     private Button utton2;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    public int buuton;
+    //necesito declarar asi mi variable para poder usarla en la clase Adap
+    public static int buuton=0;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -42,6 +45,11 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
         recyclerView.setLayoutManager(layoutManager);
     }
 
+    public static int getBuuton()
+    {
+        return buuton;
+    }
+
     @Override
     public void onClick(View view) {
         //Toast.makeText(this,"Boiler",Toast.LENGTH_LONG).show();
@@ -49,11 +57,11 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.utt1:
                 buuton=1;
-                //Toast.makeText(this,buuton,Toast.LENGTH_LONG).show();
+                Toast.makeText(this,valueOf(buuton),Toast.LENGTH_LONG).show();
                 break;
             case R.id.utt2:
                 buuton=2;
-                //Toast.makeText(this,buuton,Toast.LENGTH_LONG).show();
+                Toast.makeText(this,valueOf(buuton),Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -86,4 +94,5 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
         recyclerView.setAdapter(adap);
 
     }
+
 }
