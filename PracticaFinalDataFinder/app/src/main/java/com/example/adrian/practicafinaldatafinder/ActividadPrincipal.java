@@ -49,9 +49,11 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.utt1:
                 buuton=1;
+                //Toast.makeText(this,buuton,Toast.LENGTH_LONG).show();
                 break;
             case R.id.utt2:
                 buuton=2;
+                //Toast.makeText(this,buuton,Toast.LENGTH_LONG).show();
                 break;
         }
     }
