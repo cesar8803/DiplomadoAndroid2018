@@ -26,7 +26,7 @@ public class ListResultsAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Decimos que template (xml) utilizaremos para la lista
+        //Decimos que template (xml) utilizaremos para la lista en este caso fue foursquare_result_item
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.foursquare_result_item,null);
         MyViewHolder vh = new MyViewHolder(view);
         return vh;
@@ -38,7 +38,6 @@ public class ListResultsAdapter extends RecyclerView.Adapter {
         ((MyViewHolder)holder).distance.setText((venues.get(position).getLocation().getDistance().toString()));
         ((MyViewHolder)holder).city.setText(venues.get(position).getLocation().getCity());
         ((MyViewHolder)holder).numerito.setText(String.valueOf(position + 1));
-
     }
 
     @Override

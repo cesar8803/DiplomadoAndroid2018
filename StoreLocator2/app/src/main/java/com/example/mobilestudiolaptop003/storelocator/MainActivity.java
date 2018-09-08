@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         callLiverpoolAPI();
     }
-
-
         public void callLiverpoolAPI(){
             RequestQueue queue = Volley.newRequestQueue(this);
             String URL=Uri.parse("https://api.myjson.com/bins/r882c").toString();
@@ -56,10 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             queue.add(stringRequest);
 
         }
-
-
-
-
 
     @Override
     public void onErrorResponse(VolleyError error) {
