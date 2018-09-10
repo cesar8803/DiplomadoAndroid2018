@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.Adapter.ListResultsAdapter;
 import com.example.Fragment.ListResultFragment;
+import com.example.Fragment.MapsResultFragment;
 import com.example.mobilestudiolaptop004.placefinder.model.ApiFourSquareResponse;
 import com.example.mobilestudiolaptop004.placefinder.model.Venue;
 import com.google.gson.Gson;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView.LayoutManager layoutManager;
     private EditText editText;
 
-    private FragmentManager fragmentManager; //Clase que me permite agregar fragmentos a mi activity
+    //Clase que me permite agregar fragmentos a mi activity
+    private FragmentManager fragmentManager;
     private Toolbar myToolbar;
 
     private ImageButton imageButton1;
@@ -69,23 +71,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myToolbar=(Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         //TODO Explicar enlace de toolbar y activity
-
-
-
     }
 
     @Override
     public void onClick(View view) {
-        String query = editText.getText().toString();
-        Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
-        //callFourSquareApi("gasolinera");  esta linea es de practica pasada
-        if (query.isEmpty()==false){
-            callFourSquareApi(query);
-            attachFragment();
-        }else{
-            Toast.makeText(this,"Ingresa algo dude!!!!", Toast.LENGTH_LONG).show();
+        if (view.getId()==R.id.B1) {
+            String query = editText.getText().toString();
+            Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+            //callFourSquareApi("gasolinera");  esta linea es de practica pasada
+            if (query.isEmpty() == false) {
+                callFourSquareApi(query);
+                callattachFragmentList();
+            } else {
+                Toast.makeText(this, "Ingresa algo dude!!!!", Toast.LENGTH_LONG).show();
+            }
+        }else if (view.getId()==R.id.mybuttonmap){
+            callattachFragmentMaps();
+            Toast.makeText(this,"queires mapas", Toast.LENGTH_LONG).show();
         }
-
     }
 
 
@@ -109,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResponse(Object response) {
         //Toast.makeText(this,(String)response, Toast.LENGTH_LONG).show();
-
         Gson gson = new Gson();
         ApiFourSquareResponse apiFourSquareResponse=gson.fromJson((String) response, ApiFourSquareResponse.class);
         //Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(0).getId(),Toast.LENGTH_LONG).show();
@@ -121,8 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else{
                 Toast.makeText(this,"No Results bro..",Toast.LENGTH_LONG).show();
             }
-
-
     }
     //Este metodo es obligatorio
     @Override
@@ -131,10 +131,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //genramos un metodo para agregar nuestros fragmentos
-    public void attachFragment(){
+    public void callattachFragmentList(){
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         Fragment listresultsfragment = new ListResultFragment();
         fragmentTransaction.replace(R.id.main_content_container,listresultsfragment);
         fragmentTransaction.commit();
     }
+    public void callattachFragmentMaps(){
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        Fragment mapsresultsfragment = new MapsResultFragment();
+        fragmentTransaction.replace(R.id.main_content_container,mapsresultsfragment);
+        fragmentTransaction.commit();
+    }
+
 }

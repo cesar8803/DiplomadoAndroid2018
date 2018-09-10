@@ -27,7 +27,7 @@ public class ListResultsAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Decimos que template (xml) utilizaremos para la lista en este caso fue foursquare_result_item
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.foursquare_result_item,null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_list_result,null);
         MyViewHolder vh = new MyViewHolder(view);
         return vh;
     }
