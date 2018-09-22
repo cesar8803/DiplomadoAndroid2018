@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //Volley --> libreria para trabajar http, esta es de google
 
     private Button boton1;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private EditText editText;
 
     //Clase que me permite agregar fragmentos a mi activity
@@ -46,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar myToolbar;
 
     private ImageButton imageButton1;
+    //esto lo converti en variable global
+    private List<Venue> venues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageButton1=findViewById(R.id.mybuttonmap);
         imageButton1.setOnClickListener(this);
 
-        recyclerView=(RecyclerView) findViewById(R.id.recycler_view_results);
-        layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
         //inicializamos fragment manager
         fragmentManager=getFragmentManager();
@@ -81,13 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //callFourSquareApi("gasolinera");  esta linea es de practica pasada
             if (query.isEmpty() == false) {
                 callFourSquareApi(query);
-                callattachFragmentList();
             } else {
                 Toast.makeText(this, "Ingresa algo dude!!!!", Toast.LENGTH_LONG).show();
             }
         }else if (view.getId()==R.id.mybuttonmap){
-            callattachFragmentMaps();
-            Toast.makeText(this,"queires mapas", Toast.LENGTH_LONG).show();
+
+            if (venues !=null && venues.size()>0) {
+                callattachFragmentMaps(venues);
+                Toast.makeText(this, "Quieres mapas.", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(this, "Tienes que ingresar algo para buscar mapas.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -116,10 +117,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ApiFourSquareResponse apiFourSquareResponse=gson.fromJson((String) response, ApiFourSquareResponse.class);
         //Toast.makeText(this, apiFourSquareResponse.getResponse().getVenues().get(0).getId(),Toast.LENGTH_LONG).show();
         //Toast.makeText(this, apiFourSquareResponse.getResponse().getCategories().get(1).getIdc(),Toast.LENGTH_LONG).show();
-        List<Venue> venues = apiFourSquareResponse.getResponse().getVenues();
+
+        //esta ya no la necesito cree venues variable global
+        //List<Venue>venues = apiFourSquareResponse.getResponse().getVenues();
+
+        venues = apiFourSquareResponse.getResponse().getVenues();
             if(venues.size()>0){
-                ListResultsAdapter listResultsAdapter = new ListResultsAdapter(venues);
-                recyclerView.setAdapter(listResultsAdapter);
+                //ListResultsAdapter listResultsAdapter = new ListResultsAdapter(venues);
+                //recyclerView.setAdapter(listResultsAdapter);
+                callattachFragmentList(venues);
             }else{
                 Toast.makeText(this,"No Results bro..",Toast.LENGTH_LONG).show();
             }
@@ -131,15 +137,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //genramos un metodo para agregar nuestros fragmentos
-    public void callattachFragmentList(){
+    public void callattachFragmentList(List<Venue>venues){
+
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         Fragment listresultsfragment = new ListResultFragment();
+        ((ListResultFragment)listresultsfragment).setVenues(venues);
         fragmentTransaction.replace(R.id.main_content_container,listresultsfragment);
         fragmentTransaction.commit();
     }
-    public void callattachFragmentMaps(){
+    public void callattachFragmentMaps(List<Venue>venues){
+
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         Fragment mapsresultsfragment = new MapsResultFragment();
+        ((MapsResultFragment)mapsresultsfragment).setVenues(venues);
         fragmentTransaction.replace(R.id.main_content_container,mapsresultsfragment);
         fragmentTransaction.commit();
     }

@@ -8,11 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobilestudiolaptop004.placefinder.R;
+import com.example.mobilestudiolaptop004.placefinder.model.Venue;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MapsResultFragment extends Fragment {
+
+    private List<Venue> venues;
+    public void setVenues(List<Venue> venues) {
+        this.venues = venues;
+    }
 
 
     public MapsResultFragment() {
