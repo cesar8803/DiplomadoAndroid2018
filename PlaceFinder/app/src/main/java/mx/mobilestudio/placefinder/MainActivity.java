@@ -35,8 +35,6 @@ import mx.mobilestudio.placefinder.model.Venue;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener , Response.Listener ,Response.ErrorListener {
 
     private Button miBoton;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private EditText editText;
     private Toolbar myToolbar;
     private ImageButton map_button;
@@ -50,12 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         miBoton = (Button) findViewById(R.id.button);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_results);
         editText = findViewById(R.id.editText);
         map_button = findViewById(R.id.mybuttonmap);
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
          myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
