@@ -28,6 +28,7 @@ import java.util.List;
 
 import mx.mobilestudio.placefinder.adapter.ListResultsAdapter;
 import mx.mobilestudio.placefinder.fragment.ListResultsFragment;
+import mx.mobilestudio.placefinder.fragment.MapsResultsFragment;
 import mx.mobilestudio.placefinder.model.ApiFourSquareResponse;
 import mx.mobilestudio.placefinder.model.Venue;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText;
     private Toolbar myToolbar;
     private ImageButton map_button;
+    private List<Venue> venues;
 
     private FragmentManager fragmentManager; // Clase que me permite agregar fragmentos a mi Activity
 
@@ -69,17 +71,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+        if(view.getId() == R.id.button){
+            String query  = editText.getText().toString();
 
 
-        String query  = editText.getText().toString();
+            if(query.isEmpty()==false){
+                callFourSquareApi(query);
+            }else{
+                Toast.makeText(this,"Debes introducir un valor!!!",Toast.LENGTH_LONG).show();
 
+            }
+        }else if(view.getId() == R.id.mybuttonmap){
+            if(venues !=null && venues.size()>0){
+                attachMapFragment(venues);
+                //TODO implementar mandar a llamar el fragmento de Mapa
 
-        if(query.isEmpty()==false){
-            callFourSquareApi(query);
-        }else{
-            Toast.makeText(this,"Debes introducir un valor!!!",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this, "Debes hacer una busqueda!!",Toast.LENGTH_LONG ).show();
+            }
+
 
         }
+
+
     }
 
 
@@ -114,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ApiFourSquareResponse apiFourSquareResponse = gson.fromJson((String) response, ApiFourSquareResponse.class);
 
-        List<Venue> venues = apiFourSquareResponse.getResponse().getVenues();
+        venues = apiFourSquareResponse.getResponse().getVenues();
         //Aqui validamos que tengamos resultados!!
 
         if(venues.size()>0){
@@ -149,6 +163,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    // Generamos un metodo para agregar nuestros Fragmentos
+    public void attachMapFragment(List<Venue> venues){
 
+        FragmentTransaction fragmentTransaction  = fragmentManager.beginTransaction();
+
+        Fragment mapsResultsfragment =  new MapsResultsFragment();
+
+        ((MapsResultsFragment) mapsResultsfragment).setVenues(venues);
+
+
+        fragmentTransaction.replace(R.id.main_content_container, mapsResultsfragment);
+
+        fragmentTransaction.commit();
+
+    }
 
 }
