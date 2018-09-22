@@ -74,12 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+
+
         String query  = editText.getText().toString();
 
 
         if(query.isEmpty()==false){
-           // callFourSquareApi(query);
-            attachFragment();
+            callFourSquareApi(query);
         }else{
             Toast.makeText(this,"Debes introducir un valor!!!",Toast.LENGTH_LONG).show();
 
@@ -123,9 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(venues.size()>0){
 
-            ListResultsAdapter listResultsAdapter = new ListResultsAdapter(venues);
-
-            recyclerView.setAdapter(listResultsAdapter);
+            attachFragment(venues);
         }else{
             Toast.makeText(this,"No se encontraron resultados!" ,Toast.LENGTH_LONG).show();
         }
@@ -140,11 +139,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     // Generamos un metodo para agregar nuestros Fragmentos
-    public void attachFragment(){
+    public void attachFragment(List<Venue> venues){
 
         FragmentTransaction fragmentTransaction  = fragmentManager.beginTransaction();
 
         Fragment listresultsfragment =  new ListResultsFragment();
+
+        ((ListResultsFragment) listresultsfragment).setVenues(venues);
+
 
         fragmentTransaction.replace(R.id.main_content_container, listresultsfragment);
 
