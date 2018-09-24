@@ -1,20 +1,18 @@
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.Fragment.MapsResultFragment"
-    >
+    tools:context="com.example.adrian.placefindermaps.Fragment.MapsResultFragment">
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@android:color/holo_red_light">
-
-
-        <!-- TODO: Update blank fragment layout -->
+    >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,9 +21,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
+                android:text="hello_blank_fragment"
+                />
 
         </RelativeLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 </FrameLayout>

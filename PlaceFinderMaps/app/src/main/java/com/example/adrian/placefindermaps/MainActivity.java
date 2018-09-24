@@ -1,5 +1,8 @@
 package com.example.adrian.placefindermaps;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,12 +19,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adrian.placefindermaps.Fragment.ListResultFragment;
+import com.example.adrian.placefindermaps.Fragment.MapsResultFragment;
+import com.example.adrian.placefindermaps.model.ApiFourSquareResponse;
+import com.example.adrian.placefindermaps.model.Venue;
+import com.google.gson.Gson;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Response.Listener, Response.ErrorListener  {
 
     private Button boton1;
     private EditText editText;
-
+    private FragmentManager fragmentManager;
+    private List<Venue>venues;
+    private ImageButton imageButton1;
+    private Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         boton1= findViewById(R.id.B1);
         boton1.setOnClickListener(this);
-
-
+        fragmentManager=getFragmentManager();
+        imageButton1=findViewById(R.id.mybuttonmap);
+        imageButton1.setOnClickListener(this);
+        myToolbar=(Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        editText=findViewById(R.id.editText);
     }
 
     @Override
@@ -41,6 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 callFourSquareApi(query);
             }else{
                 Toast.makeText(this,"Ingresa una palabra.", Toast.LENGTH_LONG).show();
+            }
+        }else if (view.getId()==R.id.mybuttonmap){
+            if (venues != null && venues.size()>0){
+                callattachFragmentMaps(venues);
+                Toast.makeText(this,"MAPAS", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(this,"Escribe algo", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -66,6 +90,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onResponse(Object response) {
+        Gson gson = new Gson();
+        ApiFourSquareResponse apiFourSquareResponse = gson.fromJson((String) response, ApiFourSquareResponse.class);
+        venues = apiFourSquareResponse.getResponse().getVenues();
+        if (venues.size() > 0) {
+            callattachFragmentList(venues);
+        } else {
+            Toast.makeText(this, "No Results bro..", Toast.LENGTH_LONG).show();
+        }
+    }
 
+
+    public void callattachFragmentList (List<Venue>venues) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment listresultsfragment = new ListResultFragment();
+        ((ListResultFragment) listresultsfragment).setVenues(venues);
+        fragmentTransaction.replace(R.id.main_content_container, listresultsfragment);
+        fragmentTransaction.commit();
+    }
+
+    public void callattachFragmentMaps(List<Venue>venues){
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        Fragment mapsresultsfragment = new MapsResultFragment();
+        ((MapsResultFragment)mapsresultsfragment).setVenues(venues);
+        fragmentTransaction.replace(R.id.main_content_container,mapsresultsfragment);
+        fragmentTransaction.commit();
     }
 }
