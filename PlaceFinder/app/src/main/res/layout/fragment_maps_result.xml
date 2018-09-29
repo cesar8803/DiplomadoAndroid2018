@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 <fragment  xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> 04690d91451d8801c150f3a6a8c1e46504bb997b
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
