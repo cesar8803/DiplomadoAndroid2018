@@ -33,4 +33,5 @@ dependencies {
     //despues para agregarla al 100 debo dar click on "Sync now"
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.+'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }
