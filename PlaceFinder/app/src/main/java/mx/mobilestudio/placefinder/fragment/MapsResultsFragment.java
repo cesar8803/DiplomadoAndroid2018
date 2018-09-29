@@ -26,6 +26,8 @@ public class MapsResultsFragment extends Fragment {
 
     public MapsResultsFragment() {
         // Required empty public constructor
+
+        //Todo implementar mapas
     }
 
 
