@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Metodo para ejecutar el request HTTP mediante Volley
     public void callFourSquareApi(String  query) {
 
-        String location =  "19.433997"+","+"-99.146006"; // HARDCODE
+        String location =  "19.395209"+","+"-99.1544203"; // HARDCODE
 
         RequestQueue queue  = Volley.newRequestQueue(this);
 
