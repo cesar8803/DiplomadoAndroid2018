@@ -14,8 +14,7 @@ import com.example.mobilestudiolaptop004.placefinder.model.Venue;
 
 import java.util.List;
 
-public class
-ListResultsAdapter extends RecyclerView.Adapter {
+public class ListResultsAdapter extends RecyclerView.Adapter {
 
     public List<Venue> venues;
 
