@@ -1,5 +1,8 @@
 package com.example.adrian.practicafinaldatafinder;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adrian.practicafinaldatafinder.Adptr.Adap;
+import com.example.adrian.practicafinaldatafinder.Fragment.ListResultFragment;
 import com.example.adrian.practicafinaldatafinder.Mo.Inicio_d_Mo;
 import com.example.adrian.practicafinaldatafinder.Mo.Venue;
 import com.google.gson.Gson;
@@ -29,6 +33,8 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
     private Button utton2;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    private FragmentManager fragmentManager;
+    private List<Venue> venues;
     //necesito declarar asi mi variable para poder usarla en la clase Adap
     public static int buuton=0;
 
@@ -43,6 +49,7 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
         recyclerView=(RecyclerView) findViewById(R.id.rc);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        fragmentManager=getFragmentManager();
     }
 
     public static int getBuuton()
@@ -95,4 +102,15 @@ public class ActividadPrincipal extends AppCompatActivity implements View.OnClic
 
     }
 
+    public void attachFragmentList(List<Venue>venues){
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        Fragment listresultsfragment = new ListResultFragment();
+        ((ListResultFragment)listresultsfragment).setVenues(venues);
+        fragmentTransaction.replace(R.id.main_content_container,listresultsfragment);
+        fragmentTransaction.commit();
+    }
+
+    public void attachFragmentMaps(List<Venue>venues){
+
+    }
 }

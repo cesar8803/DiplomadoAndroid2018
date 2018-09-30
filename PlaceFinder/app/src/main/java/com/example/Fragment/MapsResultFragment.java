@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public  class MapsResultFragment extends Fragment implements OnMapReadyCallback {
+public class MapsResultFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     private List<Venue> venues;
