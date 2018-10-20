@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import mx.mobilestudio.promohunters.fragment.InitialSelectionFragment;
+import mx.mobilestudio.promohunters.fragment.OnlineFormFragment;
 
 public class PromoFormActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class PromoFormActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
 
     public static final int FRAGMENT_INTIAL_DESITION = 1;
+    public static final int FRAGMENT_ONLINE_FORM = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,15 @@ public class PromoFormActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 //TODO terminar el agregar el fragmento
                 break;
+            case FRAGMENT_ONLINE_FORM:
 
+                Fragment initialSelectionFragment2 = new OnlineFormFragment();
+
+                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment2);
+
+                fragmentTransaction.commit();
+                //TODO terminar el agregar el fragmento
+                break;
 
         }
 
