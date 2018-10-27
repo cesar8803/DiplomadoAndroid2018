@@ -29,6 +29,13 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_home_container"
+        android:background="@color/colorAccent">
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
