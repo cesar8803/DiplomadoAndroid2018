@@ -13,12 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:textSize="124dp"
+        android:padding="5dip"
          />
     <Spinner
         android:id="@+id/idspinner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/idspinner1">
+        android:layout_below="@+id/idspinner1"
+        android:textSize="124dp"
+        android:padding="5dip">
+
     </Spinner>
     <Button
         android:id="@+id/b1"
