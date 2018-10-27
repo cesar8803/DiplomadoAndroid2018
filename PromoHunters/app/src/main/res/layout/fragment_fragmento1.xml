@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/form_container">
 
@@ -24,9 +24,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Titulo"
+                android:id="@+id/title"
+                android:hint="@string/hintTitle"
                 android:maxLines="1"
-                android:inputType="textWebEmailAddress"/>
+                android:inputType="textPersonName"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -39,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/precio"
+                android:hint="@string/hintPrice"
                 android:maxLines="1"
                 android:inputType="numberDecimal"/>
         </android.support.design.widget.TextInputLayout>
@@ -54,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/link"
+                android:hint="@string/hintLink"
                 android:maxLines="1"
                 android:inputType="textWebEmailAddress"/>
         </android.support.design.widget.TextInputLayout>
@@ -68,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/descripcion"
-                android:hint="Descripcion"
+                android:hint="@string/hintDescription"
                 android:lines="4"
                 android:maxLines="8"
                 android:singleLine="false"
@@ -83,7 +86,8 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/titlequestion"
+        android:text="@string/buttonSavePromo"
+        android:id="@+id/button_accept"
         android:layout_below="@+id/form_container"
         android:layout_centerHorizontal="true"
         />
