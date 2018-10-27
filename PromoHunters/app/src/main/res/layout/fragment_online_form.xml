@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".fragment.OnlineFormFragment">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/form_container"
+    android:orientation="vertical">
+
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -16,11 +22,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/title"
-            android:hint="Titulo"
+            android:hint="@string/hintTitle"
             android:maxLines="1"
             android:inputType="textPersonName"/>
 
 
     </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/container_precio">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/precio"
+            android:hint="@string/hintPrice"
+            android:maxLines="1"
+            android:inputType="numberDecimal"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/container_link">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/link"
+            android:hint="@string/hintLink"
+            android:maxLines="1"
+            android:inputType="textWebEmailAddress"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/container_description">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descripcion"
+            android:hint="@string/hintDescription"
+            android:lines="4"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:inputType="textMultiLine"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+</LinearLayout>
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonSavePromo"
+        android:id="@+id/buttonAddnewPromo"
+        android:layout_below="@+id/form_container"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
