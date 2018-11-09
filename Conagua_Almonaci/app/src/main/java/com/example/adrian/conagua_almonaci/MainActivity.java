@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,8 @@ import com.example.adrian.conagua_almonaci.Parseo.ListaRespaldo;
 import com.example.adrian.conagua_almonaci.Parseo.NombresListaSpinner;
 import com.example.adrian.conagua_almonaci.Parseo.Result;
 import com.google.gson.Gson;
+
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String edoclima;
     public static String ListaRes1;
     public static String ListaRes2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +183,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         android.R.layout.simple_spinner_item, Listamunicipiosmispinner);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner2.setAdapter(adapter);
+
+
+
+
+
             } else{
                 if (controlspinner2==true) {
                     List<NombresListaSpinner> Listamunicipiosmispinner = new ArrayList<>();
@@ -208,7 +217,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
 
-
                     ArrayAdapter<NombresListaSpinner> adapter = new ArrayAdapter<>(this,
                             android.R.layout.simple_spinner_item, Listamunicipiosmispinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -232,12 +240,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     public void fragemntotexto() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment pronosticosClima = new PronosticoClima();
         fragmentTransaction.replace(R.id.principalLayout, pronosticosClima);
         fragmentTransaction.commit();
     }
+
+
 }
 
 
