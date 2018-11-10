@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import mx.mobilestudio.promohunters.Adaptador.PromoHuntersAdaptador;
 import mx.mobilestudio.promohunters.model.Promo;
 
@@ -71,10 +73,28 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
                 Promo promo = child.getValue(Promo.class);
                 promos.add(promo);
                 //Toast.makeText(getActivity(),"La promo es: "+promo.getTitle()+"su link es: "+ promo.getLink(),Toast.LENGTH_LONG).show();
+                saveLocalStoragePromo(promo);
             }
             PromoHuntersAdaptador promoHuntersAdaptador = new PromoHuntersAdaptador(promos);
             recyclerView.setAdapter(promoHuntersAdaptador);
         }
+
+        public void saveLocalStoragePromo(Promo promo){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        //Todas las actualizaciones se ejecutan between el begintransaction y commitTransaction
+        Promo localPromo = realm.copyToRealm(promo);
+        realm.commitTransaction();
+        }
+
+        public void getAllSavedPromos(){
+        Realm realm = Realm.getDefaultInstance();
+            RealmResults<Promo> promos = realm.where(Promo.class).findAll();
+            for (Promo currentPromo : promos){
+                Toast.makeText(getActivity(),"Name"+currentPromo.getTitle(),Toast.LENGTH_LONG).show();
+            }
+        }
+
         @Override
         public void onCancelled (@NonNull DatabaseError databaseError){
 

@@ -42,6 +42,7 @@ public class PromoHuntersAdaptador extends RecyclerView.Adapter  {
     @Override
     public int getItemCount() {
         return promos.size();
+        //esta linea dice cuantas te va a mostrar.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
