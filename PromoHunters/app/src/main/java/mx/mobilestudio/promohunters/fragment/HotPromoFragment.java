@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.mobilestudio.promohunters.R;
+import mx.mobilestudio.promohunters.adapter.PromoHuntersAdaptador;
 import mx.mobilestudio.promohunters.model.Promo;
 
 
@@ -72,8 +73,8 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
                 promos.add(promo);
                 //Toast.makeText(getActivity(),"La promo es: "+promo.getTitle()+"su link es: "+ promo.getLink(),Toast.LENGTH_LONG).show();
             }
-            //PromoHuntersAdaptador promoHuntersAdaptador = new PromoHuntersAdaptador(promos);
-            //recyclerView.setAdapter(promoHuntersAdaptador);
+            PromoHuntersAdaptador promoHuntersAdaptador = new PromoHuntersAdaptador(promos);
+            recyclerView.setAdapter(promoHuntersAdaptador);
         }
         @Override
         public void onCancelled (@NonNull DatabaseError databaseError){
