@@ -1,6 +1,8 @@
 package mx.mobilestudio.promohunters.model;
 
-public class Promo {
+import io.realm.RealmObject;
+
+public class Promo extends RealmObject {
     private String title;
     private Float price;
     private String link;
