@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import mx.mobilestudio.promohunters.R;
+import mx.mobilestudio.promohunters.model.Promo;
 
 
-public class OnlineFormFragment extends Fragment implements View.OnClickListener {
+public class OnlineFormFragment extends Fragment implements View.OnClickListener, OnSuccessListener, OnFailureListener {
 
 
     private Button button;
@@ -24,10 +31,14 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
     private EditText editTextDesc;
     private EditText editTextLink;
 
+    private DatabaseReference databaseReference;
+
 
 
     public OnlineFormFragment() {
         // Required empty public constructor
+        databaseReference=FirebaseDatabase.getInstance().getReference();
+
     }
 
 
@@ -81,6 +92,9 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
         if(validateResult.isEmpty()){
             //Los datos estan correctos, podemos guardarlos en Firebase
 
+            createNewpromo();
+
+
         }else {
 
             Toast.makeText(getActivity(), validateResult,Toast.LENGTH_LONG).show();
@@ -123,6 +137,29 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
         return validateString;
 
     }
+
+    public void createNewpromo(){
+        Promo newPromo= new Promo();
+        newPromo.setTitle(editTextTitle.getText().toString());
+        newPromo.setPrice(Float.valueOf(editTextPrice.getText().toString()));
+        newPromo.setLink(editTextLink.getText().toString());
+        newPromo.setDescription(editTextDesc.getText().toString());
+        String promoID = databaseReference.push().getKey();
+        databaseReference.child("promos").child(promoID).setValue(newPromo).addOnSuccessListener(this).addOnFailureListener(this);
+
+    }
+
+    @Override
+    public void onFailure(@NonNull Exception e) {
+
+    }
+
+    @Override
+    public void onSuccess(Object o) {
+        Toast.makeText(getActivity(), "Good to go!!", Toast.LENGTH_SHORT).show();
+        getActivity().finish();
+    }
+
 
 
 
