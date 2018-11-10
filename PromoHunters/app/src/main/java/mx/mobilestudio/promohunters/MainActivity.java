@@ -6,9 +6,15 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import mx.mobilestudio.promohunters.fragment.HotPromoFragment;
 
@@ -17,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton imageButtonAddNewPromo;
     public static final int FRAGMENT_HOT_PROMO=1;
     private FragmentManager fragmentManager;
+
+    private String token;
 
 
 
@@ -29,6 +37,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentManager=getFragmentManager();
 
         attachFragment(FRAGMENT_HOT_PROMO);
+
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = FirebaseInstanceId.getInstance().getToken();
+                Log.d("FCM_TOKEN", token);
+                Toast.makeText(MainActivity.this, token, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
     }
 
