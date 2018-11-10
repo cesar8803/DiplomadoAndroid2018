@@ -57,9 +57,7 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
     public void onClick(View view) {
         String validateResult=validateForm();
         if(validateResult.isEmpty()){
-
             createNewpromo();
-
         }else{
             Toast.makeText(getActivity(),validateResult,Toast.LENGTH_LONG).show();
         }
