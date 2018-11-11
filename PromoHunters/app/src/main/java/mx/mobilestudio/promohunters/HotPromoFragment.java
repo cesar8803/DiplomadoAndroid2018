@@ -55,7 +55,7 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
         recyclerView.setLayoutManager(layoutManager);
 
         //aqui manda a llamar ami otra clase
-
+        getAllSavedPromos();
         return viewroot;
         //return inflater.inflate(R.layout.fragment_hot_promo, container, false);
     }
@@ -91,7 +91,7 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
         Realm realm = Realm.getDefaultInstance();
             RealmResults<Promo> promos = realm.where(Promo.class).findAll();
             for (Promo currentPromo : promos){
-                Toast.makeText(getActivity(),"Name"+currentPromo.getTitle(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Title"+currentPromo.getTitle(),Toast.LENGTH_LONG).show();
             }
         }
 
