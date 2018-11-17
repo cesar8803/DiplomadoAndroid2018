@@ -87,13 +87,30 @@
 
 </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonContainer"
+        android:layout_below="@+id/form_container">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/botonImagen"
+            android:layout_centerHorizontal="true"
+            android:src="@android:drawable/ic_menu_camera"/>
+
+
+    </RelativeLayout>
+
+
 
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/buttonSavePromo"
         android:id="@+id/buttonAddnewPromo"
-        android:layout_below="@+id/form_container"
+        android:layout_below="@+id/imageButtonContainer"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

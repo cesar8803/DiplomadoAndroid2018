@@ -36,7 +36,7 @@ public class PromoFormActivity extends AppCompatActivity {
 
                 Fragment initialSelectionFragment = new InitialSelectionFragment();
 
-                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment);
+                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment).addToBackStack(null);
 
                 fragmentTransaction.commit();
                 //TODO terminar el agregar el fragmento
@@ -45,7 +45,7 @@ public class PromoFormActivity extends AppCompatActivity {
 
                 Fragment initialSelectionFragment2 = new OnlineFormFragment();
 
-                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment2);
+                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment2).addToBackStack(null);
 
                 fragmentTransaction.commit();
                 //TODO terminar el agregar el fragmento

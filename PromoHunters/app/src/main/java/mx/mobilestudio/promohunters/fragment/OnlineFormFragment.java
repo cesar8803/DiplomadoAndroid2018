@@ -2,6 +2,7 @@ package mx.mobilestudio.promohunters.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,15 +23,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import mx.mobilestudio.promohunters.R;
 import mx.mobilestudio.promohunters.model.Promo;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class OnlineFormFragment extends Fragment implements View.OnClickListener, OnSuccessListener, OnFailureListener {
 
 
     private Button button;
+    private ImageButton imageButton;
     private EditText editTextTitle;
     private EditText editTextPrice;
     private EditText editTextDesc;
     private EditText editTextLink;
+    private static final int SELECT_PHOTO = 100;
+    private Uri selectedImage;
 
     private DatabaseReference databaseReference;
 
@@ -40,6 +47,7 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
     }
+
 
 
 
@@ -58,13 +66,15 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
 
 
         button = view.findViewById(R.id.buttonAddnewPromo);
+
         editTextTitle = view.findViewById(R.id.title);
         editTextPrice = view.findViewById(R.id.precio);
         editTextLink = view.findViewById(R.id.link);
         editTextDesc = view.findViewById(R.id.descripcion);
+        imageButton = view.findViewById(R.id.botonImagen);
 
 
-
+        imageButton.setOnClickListener(this);
         button.setOnClickListener(this);
 
         return view;
@@ -86,20 +96,63 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
 
-
-        String validateResult = validateForm();
-
-        if(validateResult.isEmpty()){
-            //Los datos estan correctos, podemos guardarlos en Firebase
-
-            createNewpromo();
+        switch (view.getId()){
+            case R.id.buttonAddnewPromo:
 
 
-        }else {
+                String validateResult = validateForm();
 
-            Toast.makeText(getActivity(), validateResult,Toast.LENGTH_LONG).show();
+                if(validateResult.isEmpty()){
+                    //Los datos estan correctos, podemos guardarlos en Firebase
+
+                    createNewpromo();
+
+
+                }else {
+
+                    Toast.makeText(getActivity(), validateResult,Toast.LENGTH_LONG).show();
+                }
+
+                break;
+            case R.id.botonImagen:
+
+
+                selecImage();
+                break;
+
         }
 
+
+
+
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        switch (requestCode){
+            case SELECT_PHOTO:
+                if(resultCode == RESULT_OK){
+                    selectedImage = imageReturnedIntent.getData();
+
+                    Toast.makeText(getActivity(), "Image selected!!  "+selectedImage.getLastPathSegment(),Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+        }
+
+    }
+
+
+
+    public void selecImage(){
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
 
 

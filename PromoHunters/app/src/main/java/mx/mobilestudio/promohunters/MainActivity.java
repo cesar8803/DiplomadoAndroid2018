@@ -67,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (FRAGMENT_REQUIRED_ID){
             case FRAGMENT_HOT_PROMO:
                 Fragment hotPromoFragment= new HotPromoFragment();
-                fragmentTransaction.replace(R.id.main_home_container,hotPromoFragment);
+                fragmentTransaction.replace(R.id.main_home_container,hotPromoFragment).addToBackStack(null);
                 fragmentTransaction.commit();
+
                 break;
         }
     }
