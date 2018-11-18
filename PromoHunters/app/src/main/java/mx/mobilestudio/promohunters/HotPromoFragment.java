@@ -97,7 +97,7 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
 
         @Override
         public void onCancelled (@NonNull DatabaseError databaseError){
-
+            Toast.makeText(getActivity(),"Sin internet",Toast.LENGTH_LONG).show();
         }
 
 
