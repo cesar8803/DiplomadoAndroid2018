@@ -29,6 +29,8 @@ public class PromoFormActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         if(view.getId()==R.id.b1){
             fragmentoonline();
+        }else if (view.getId()==R.id.b2){
+            fragmentofisico();
         }
 
     }
@@ -36,7 +38,14 @@ public class PromoFormActivity extends AppCompatActivity implements View.OnClick
     public void fragmentoonline (){
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         Fragment fragmento1 = new Fragmento1();
-        fragmentTransaction.replace(R.id.activitypromolayout,fragmento1);
+        fragmentTransaction.replace(R.id.activitypromolayout,fragmento1).addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void fragmentofisico (){
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        Fragment fragmento2 = new Fragmento2();
+        fragmentTransaction.replace(R.id.activitypromolayout,fragmento2).addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

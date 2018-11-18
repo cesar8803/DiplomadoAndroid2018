@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         //intent es una peticion que se hace atravez de una clase
-        Intent intent = new Intent(this,PromoFormActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, PromoFormActivity.class);
+            startActivity(intent);
+
     }
 
 
@@ -73,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment hotPromoFragment= new HotPromoFragment();
             ((HotPromoFragment)hotPromoFragment).setPromos(promos);
             fragmentTransaction.replace(R.id.main_home_container,hotPromoFragment);
-
             fragmentTransaction.commit();
+
             break;
         }
     }
