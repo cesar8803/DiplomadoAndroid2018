@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,17 @@ public class PromoHuntersAdaptador extends RecyclerView.Adapter {
         ((MyViewHolder)holder).vhdesc.setText(promos.get(position).getDescription());
         ((MyViewHolder)holder).vhtitle.setText(promos.get(position).getTitle());
 
+        String imageLink = promos.get(position).getImageLink();
+
+        if(imageLink!=null && !imageLink.isEmpty()){
+
+
+            Picasso.with(((MyViewHolder) holder).vhImage.getContext()).load(imageLink).into(((MyViewHolder) holder).vhImage);
+
+
+        }else{
+            ((MyViewHolder) holder).vhImage.setImageResource(android.R.drawable.ic_menu_camera);
+        }
 
 
     }
@@ -51,11 +65,13 @@ public class PromoHuntersAdaptador extends RecyclerView.Adapter {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView vhtitle;
         public TextView vhdesc;
+        public ImageView vhImage;
 
         public MyViewHolder(View itemView){
             super(itemView);
             vhtitle=itemView.findViewById(R.id.ctitle);
             vhdesc=itemView.findViewById(R.id.cdescription);
+            vhImage = itemView.findViewById(R.id.imageViewPromo);
         }
     }
 }

@@ -1,6 +1,7 @@
 package mx.mobilestudio.promohunters.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,8 +18,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import mx.mobilestudio.promohunters.R;
 import mx.mobilestudio.promohunters.model.Promo;
@@ -37,8 +44,12 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
     private EditText editTextLink;
     private static final int SELECT_PHOTO = 100;
     private Uri selectedImage;
-
+    private StorageReference  imageReference;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference  storageReference;
     private DatabaseReference databaseReference;
+    private ProgressDialog progressDialog;
+    private UploadTask uploadTask;
 
 
 
@@ -77,6 +88,15 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
         imageButton.setOnClickListener(this);
         button.setOnClickListener(this);
 
+
+        // Inicializamos el storage de Firebase
+        firebaseStorage = FirebaseStorage.getInstance();
+
+
+        //Creamos una referencia al storage
+        storageReference = firebaseStorage.getReference();
+
+
         return view;
     }
 
@@ -105,7 +125,13 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
                 if(validateResult.isEmpty()){
                     //Los datos estan correctos, podemos guardarlos en Firebase
 
-                    createNewpromo();
+
+                    if (selectedImage != null){
+                        uploadImage();
+                    }else{
+                        createNewpromo("");
+
+                    }
 
 
                 }else {
@@ -139,7 +165,6 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
                     selectedImage = imageReturnedIntent.getData();
 
                     Toast.makeText(getActivity(), "Image selected!!  "+selectedImage.getLastPathSegment(),Toast.LENGTH_SHORT).show();
-
                 }
                 break;
 
@@ -149,10 +174,86 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
 
 
 
+    // Este metodo es el encargado de subir la imagen a FireBase (Cloud Storage)
+    public void uploadImage(){
+
+        // Creamos una referencia al folder donde asignaremos las imagenes
+
+        imageReference = storageReference.child("images/"+selectedImage.getLastPathSegment());
+
+        // creamos un loading para mostrar el progreso de la carga
+
+
+        progressDialog = new ProgressDialog(getActivity());
+
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Subiendo imagen...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+
+        // iniciamos la subida de la imagen
+        uploadTask = imageReference.putFile(selectedImage);
+
+        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.incrementProgressBy((int) progress);
+            }
+        });
+
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getActivity(),"Error al subir imagen!!", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+
+            }
+        });
+
+
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                Task<Uri> dowloadURL = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                Toast.makeText(getActivity(),"Imagen guardada!! ", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+
+                //TODO por que se implementa el metodo de esta forma
+                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Toast.makeText(getActivity(),"URL"+uri.toString(),Toast.LENGTH_LONG).show();
+                        createNewpromo(uri.toString());
+
+                       // GlideApp.with(this).load("http://goo.gl/gEgYUd").into(null);
+                        Picasso.with(getActivity()).load(uri.toString()).into(imageButton);
+                    }
+
+                });
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+
     public void selecImage(){
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
-        getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
 
 
@@ -191,14 +292,17 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
 
     }
 
-    public void createNewpromo(){
+    public void createNewpromo(String imageLink){
         Promo newPromo= new Promo();
         newPromo.setTitle(editTextTitle.getText().toString());
         newPromo.setPrice(Float.valueOf(editTextPrice.getText().toString()));
         newPromo.setLink(editTextLink.getText().toString());
         newPromo.setDescription(editTextDesc.getText().toString());
+        newPromo.setImageLink(imageLink);
         String promoID = databaseReference.push().getKey();
         databaseReference.child("promos").child(promoID).setValue(newPromo).addOnSuccessListener(this).addOnFailureListener(this);
+
+
 
     }
 
@@ -210,7 +314,7 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
     @Override
     public void onSuccess(Object o) {
         Toast.makeText(getActivity(), "Good to go!!", Toast.LENGTH_SHORT).show();
-        getActivity().finish();
+       // getActivity().finish();
     }
 
 
