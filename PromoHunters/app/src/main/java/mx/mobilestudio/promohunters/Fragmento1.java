@@ -2,6 +2,7 @@ package mx.mobilestudio.promohunters;
 
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +18,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import mx.mobilestudio.promohunters.model.Promo;
 
@@ -38,6 +45,12 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
     private static final int SELECT_PHOTO = 100;
     private Uri selectedImage;
     private DatabaseReference databaseReference;
+    private StorageReference imageReference;
+    private StorageReference storageReference;
+    private FirebaseStorage firebaseStorage;
+    private ProgressDialog progressDialog;
+    private UploadTask uploadTask;
+
 
     public Fragmento1() {
         // Required empty public constructor
@@ -60,6 +73,60 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
         }
     }
 
+    //este metodo lo sube la pic (cloud storage)
+    public void uploadImage() {
+        //Creamos una referencia al folder donde asignaremos las imagenes
+        //child significa generar un nodo hijo
+        imageReference = storageReference.child("images" + selectedImage.getLastPathSegment());
+        // crear un loading para mostrar el progreso de la carga
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Subiendo imagen...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        //iniciamos la subida de la imagen
+        uploadTask = imageReference.putFile(selectedImage);
+        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.incrementProgressBy((int) progress);
+            }
+        });
+           //Revisar clases anonimas
+        //
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(),"Error al subir imagen.", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        });
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //implementation 'com.google.firebase:firebase-auth:16.0.4' esta linea es necesaria para obtenir mi url
+                Task<Uri> downloadURL = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                Toast.makeText(getActivity(),"Error al subir imagen.", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                
+                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Toast.makeText(getActivity(),"URL"+uri.toString(),Toast.LENGTH_LONG).show();
+                        //GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
+                        Picasso.with(getActivity()).load(uri.toString()).into(buttonimage);
+                        createNewpromo(uri.toString());
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +141,15 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
         editTextLink=view.findViewById(R.id.link);
         button.setOnClickListener(this);
         buttonimage.setOnClickListener(this);
+
+        //Iniciamos el storage de Firebase
+        firebaseStorage=FirebaseStorage.getInstance();
+
+        //Creamos una referencia al storage
+        storageReference=firebaseStorage.getReference();
+
+
+
         return view;
     }
 
@@ -85,7 +161,13 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
 
                 String validateResult = validateForm();
                 if (validateResult.isEmpty()) {
-                    createNewpromo();
+
+                    if (selectedImage != null){
+                        uploadImage();
+                    }else{
+                            createNewpromo("");
+                    }
+
                 } else {
                     Toast.makeText(getActivity(), validateResult, Toast.LENGTH_LONG).show();
                 }
@@ -126,12 +208,13 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
         return validateString;
     }
 
-    public void createNewpromo(){
+    public void createNewpromo(String imageLink){
         Promo newPromo= new Promo();
         newPromo.setTitle(editTextTitle.getText().toString());
         newPromo.setPrice(Float.valueOf(editTextPrice.getText().toString()));
         newPromo.setLink(editTextLink.getText().toString());
         newPromo.setDescription(editTextDescription.getText().toString());
+        newPromo.setImageLink(imageLink);
         String promoID = databaseReference.push().getKey();
         databaseReference.child("promos").child(promoID).setValue(newPromo).addOnSuccessListener(this).addOnFailureListener(this);
 
@@ -144,7 +227,6 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
 
     @Override
     public void onSuccess(Object o) {
-        Toast.makeText(getActivity(), "Good to go!!", Toast.LENGTH_SHORT).show();
-        getActivity().finish();
+
     }
 }

@@ -8,6 +8,7 @@ public class Promo extends RealmObject {
     private Float price;
     private String link;
     private String description;
+    private String imageLink;
 
     public String getTitle() {
         return title;
@@ -35,6 +36,14 @@ public class Promo extends RealmObject {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public void setDescription(String description) {
