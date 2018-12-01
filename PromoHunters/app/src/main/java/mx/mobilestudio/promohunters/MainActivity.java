@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawerLayout;
     //hamburger menu
 
-
+    private FirebaseAuth firebaseAuth;
     private List<Promo> promos;
     public static final int FRAGMENT_HOT_PROMO=1;
     private DatabaseReference databaseReference;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mandamos a llamr la fragmento fragment_hot_promo
         attachFragment(FRAGMENT_HOT_PROMO);
 
+
+        //inicializamos firebaseAuth
+        firebaseAuth=FirebaseAuth.getInstance();
         configureToolBar();
         configureNavigationDrawer();
 
@@ -108,9 +112,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        //intent es una peticion que se hace atravez de una clase
+
+        if(firebaseAuth.getCurrentUser()==null){
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }else{
+            //el usuario esta loggeado
+            //
+            //intent es una peticion que se hace atravez de una clase
+
             Intent intent = new Intent(this, PromoFormActivity.class);
             startActivity(intent);
+        }
+
 
     }
 
