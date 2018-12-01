@@ -1,10 +1,14 @@
 package mx.mobilestudio.promohunters.model;
 
-public class Promo {
+import io.realm.Realm;
+import io.realm.RealmObject;
+
+public class Promo extends RealmObject {
     private String title;
     private Float price;
     private String link;
     private String description;
+    private String imageLink;
 
     public String getTitle() {
         return title;
@@ -32,6 +36,14 @@ public class Promo {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public void setDescription(String description) {
