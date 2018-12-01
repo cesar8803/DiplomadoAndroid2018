@@ -4,9 +4,14 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton imageButtonAddNewPromo;
     public static final int FRAGMENT_HOT_PROMO=1;
     private FragmentManager fragmentManager;
+    private DrawerLayout drawerLayout;
+
 
     private String token;
 
@@ -39,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         attachFragment(FRAGMENT_HOT_PROMO);
 
 
+        configureToolBar();
+        configureNavigationDrawer();
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -51,6 +61,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Detecta los clicks que se dan en el ToolBar
+
+        int itemId = item.getItemId();
+
+        switch (itemId){
+
+            //Android Home
+
+            case android.R.id.home:
+
+                drawerLayout.openDrawer(GravityCompat.START);
+
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void configureToolBar(){
+
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        //Metodo que llamamos para poder configurar el ToolBar (Habilitar Acciones y Otras Funcionalidades)
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setHomeAsUpIndicator(android.R.drawable.ic_menu_add);
+        actionbar.setDisplayHomeAsUpEnabled(true);
+
+    }
+
+
+    private void configureNavigationDrawer(){
+        drawerLayout = findViewById(R.id.drawer_layout);
+    }
+
 
     @Override
     public void onClick(View view) {
