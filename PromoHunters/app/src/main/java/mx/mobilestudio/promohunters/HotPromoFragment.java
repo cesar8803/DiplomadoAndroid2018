@@ -82,6 +82,7 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
 
         @Override
         public void onDataChange (@NonNull DataSnapshot dataSnapshot){
+             promos.clear();
             for (DataSnapshot child : dataSnapshot.getChildren()) {
                 Promo promo = child.getValue(Promo.class);
                 promos.add(promo);

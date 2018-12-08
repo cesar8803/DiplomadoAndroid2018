@@ -221,7 +221,9 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
         newPromo.setPrice(Float.valueOf(editTextPrice.getText().toString()));
         newPromo.setLink(editTextLink.getText().toString());
         newPromo.setDescription(editTextDescription.getText().toString());
-        newPromo.setImageLink(imageLink);
+        if(!imageLink.isEmpty()){
+            newPromo.setImageLink(imageLink);
+        }
         String promoID = databaseReference.push().getKey();
         databaseReference.child("promos").child(promoID).setValue(newPromo).addOnSuccessListener(this).addOnFailureListener(this);
 

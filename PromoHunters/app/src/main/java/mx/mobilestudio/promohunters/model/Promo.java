@@ -8,7 +8,7 @@ public class Promo extends RealmObject {
     private Float price;
     private String link;
     private String description;
-    private String imageLink=" ";
+    private String imageLink="https://via.placeholder.com/300";
 
     public String getTitle() {
         return title;
