@@ -314,7 +314,7 @@ public class OnlineFormFragment extends Fragment implements View.OnClickListener
     @Override
     public void onSuccess(Object o) {
         Toast.makeText(getActivity(), "Good to go!!", Toast.LENGTH_SHORT).show();
-       // getActivity().finish();
+       getActivity().finish();
     }
 
 

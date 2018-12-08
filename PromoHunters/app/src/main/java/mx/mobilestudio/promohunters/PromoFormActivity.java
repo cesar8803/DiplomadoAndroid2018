@@ -36,7 +36,7 @@ public class PromoFormActivity extends AppCompatActivity {
 
                 Fragment initialSelectionFragment = new InitialSelectionFragment();
 
-                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment).addToBackStack(null);
+                fragmentTransaction.replace(R.id.main_fragment_container, initialSelectionFragment);
 
                 fragmentTransaction.commit();
                 //TODO terminar el agregar el fragmento

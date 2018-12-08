@@ -3,7 +3,11 @@ package mx.mobilestudio.promohunters;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -17,11 +21,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import mx.mobilestudio.promohunters.fragment.HotPromoFragment;
+import mx.mobilestudio.promohunters.util.LocationHandler;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int FRAGMENT_HOT_PROMO=1;
     private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
+    public  LocationHandler locationHandler;
 
 
     private String token;
@@ -58,6 +66,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+       // LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+         locationHandler = new LocationHandler(this);
+
+
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == LocationHandler.PETICION_PERMISO_GEOLOCATE){
+
+            if(grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                // Permiso concedido
+                locationHandler.getLatLonLocation();
+
+            }
+
+        }else{
+            //permiso denegado:
+            // Deberiamos ya no pedir permiso y la funcionalidad de Geolocalización quedaria deshabilitada
+
+        }
 
 
     }
