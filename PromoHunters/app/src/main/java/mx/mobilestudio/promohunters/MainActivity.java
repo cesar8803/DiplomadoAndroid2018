@@ -3,7 +3,10 @@ package mx.mobilestudio.promohunters;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +37,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.mobilestudio.promohunters.Util.LocationHandler;
 import mx.mobilestudio.promohunters.model.Promo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +53,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Promo> promos;
     public static final int FRAGMENT_HOT_PROMO=1;
     private DatabaseReference databaseReference;
+    public LocationHandler locationHandler;
     private String token;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == LocationHandler.PETICION_PERMISO){
+            if(grantResults.length==1 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                //pERMISO CONCEDIDO
+                locationHandler.getLatLonLocation();
+            }
+        }else{
+            //permiso denegado
+            //Deberiamos ya no pedir permiso y a funcionalidad de Geolocalizacion quedaria deshabilitado
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         configureToolBar();
         configureNavigationDrawer();
 
+
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, new OnSuccessListener< InstanceIdResult >() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -76,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, token, Toast.LENGTH_LONG).show();
             }
         });
+
+        //LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationHandler=new LocationHandler(this);
 
     }
 
@@ -120,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //el usuario esta loggeado
             //
             //intent es una peticion que se hace atravez de una clase
-
             Intent intent = new Intent(this, PromoFormActivity.class);
             startActivity(intent);
         }
@@ -139,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ((HotPromoFragment)hotPromoFragment).setPromos(promos);
             fragmentTransaction.replace(R.id.main_home_container,hotPromoFragment);
             fragmentTransaction.commit();
-
             break;
         }
     }
