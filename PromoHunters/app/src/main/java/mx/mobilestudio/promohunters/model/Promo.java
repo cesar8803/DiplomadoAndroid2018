@@ -1,6 +1,5 @@
 package mx.mobilestudio.promohunters.model;
 
-import io.realm.Realm;
 import io.realm.RealmObject;
 
 public class Promo extends RealmObject {

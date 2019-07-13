@@ -53,7 +53,6 @@ public class ListResultsAdapter extends RecyclerView.Adapter {
         public TextView city;
         public TextView numerito;
 
-
         public MyViewHolder(View itemView){
             super (itemView);
             name=itemView.findViewById(R.id.name);

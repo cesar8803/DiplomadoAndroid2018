@@ -39,10 +39,8 @@ public class ListResultFragment extends Fragment {
         // Inflate the layout for this fragment
         View viewroot= inflater.inflate(R.layout.fragment_list_result, container, false);
         recyclerView=viewroot.findViewById(R.id.recyviewfragment);
-
         layoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
         ListResultsAdapter listResultsAdapter = new ListResultsAdapter(venues);
 
         recyclerView.setAdapter(listResultsAdapter);

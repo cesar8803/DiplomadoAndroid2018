@@ -27,7 +27,6 @@ public class PromoHuntersAdaptador extends RecyclerView.Adapter  {
         this.promos=promos;
     }
 
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,7 +42,8 @@ public class PromoHuntersAdaptador extends RecyclerView.Adapter  {
         String imageLink = promos.get(position).getImageLink();
 
         if(imageLink!=null && !imageLink.isEmpty()){
-            Picasso.with( ((MyViewHolder) holder).vhImage.getContext()).load(imageLink).into(((MyViewHolder) holder).vhImage);
+            Picasso.with( ((MyViewHolder) holder).vhImage.getContext()).load(imageLink)
+                    .into(((MyViewHolder) holder).vhImage);
         }else{
             ((MyViewHolder) holder).vhImage.setImageResource(android.R.drawable.ic_menu_camera);
         }

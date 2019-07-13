@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .appendQueryParameter("v","20130815")
                     .appendQueryParameter("ll",location)
                     .appendQueryParameter("query",query).build().toString();
+            //Este es el resultado de mi URI
+        // https://api.foursquare.com/v2/venues/search?client_id=HOSIY11XMXHWFADXIPQTF5HRZA3YIWIFGRAOA5NIGXOY3CWI&
+        // client_secret=OGATJNY0E0JY15PRXYD5MQ2WW3EMFLRAWFHLAOQYSTMVKMHM&v=20130815&ll=19.433997%2C-99.146006&query=sushi
         StringRequest stringRequest = new StringRequest(Request.Method.GET,URL,this,this);
         queue.add(stringRequest);
     }

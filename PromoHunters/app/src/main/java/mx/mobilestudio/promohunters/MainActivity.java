@@ -12,8 +12,9 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppcompatActivity;
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,12 +44,9 @@ import mx.mobilestudio.promohunters.model.Promo;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private ImageButton imageButton;
     private FragmentManager fragmentManager;
-
-    //hambuerger menu
-
+    //hamburger menu
     private DrawerLayout drawerLayout;
     //hamburger menu
-
     private FirebaseAuth firebaseAuth;
     private List<Promo> promos;
     public static final int FRAGMENT_HOT_PROMO=1;
@@ -57,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String token;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions
+            , @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == LocationHandler.PETICION_PERMISO){
             if(grantResults.length==1 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
@@ -66,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }else{
             //permiso denegado
-            //Deberiamos ya no pedir permiso y a funcionalidad de Geolocalizacion quedaria deshabilitado
+            //Deberiamos ya no pedir permiso y a funcionalidad de Geolocalizacion quedaria
+            // deshabilitado
         }
     }
 
@@ -81,15 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mandamos a llamr la fragmento fragment_hot_promo
         attachFragment(FRAGMENT_HOT_PROMO);
 
-
         //inicializamos firebaseAuth
         firebaseAuth=FirebaseAuth.getInstance();
         configureToolBar();
         configureNavigationDrawer();
 
-
-
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, new OnSuccessListener< InstanceIdResult >() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this,
+                new OnSuccessListener< InstanceIdResult >() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 token = FirebaseInstanceId.getInstance().getToken();
@@ -97,10 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, token, Toast.LENGTH_LONG).show();
             }
         });
-
-        //LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        //LocationManager locationManager = (LocationManager) this
+        // .getSystemService(Context.LOCATION_SERVICE);
         locationHandler=new LocationHandler(this);
-
     }
 
     @Override
@@ -110,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (itemId){
             //Android Home
             case android.R.id.home:
-
                     drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
@@ -136,25 +132,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
         if(firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }else{
             //el usuario esta loggeado
-            //
             //intent es una peticion que se hace atravez de una clase
             Intent intent = new Intent(this, PromoFormActivity.class);
             startActivity(intent);
         }
-
-
     }
 
-
-
     public void attachFragment(int FRAGMENT_REQUIRED_ID){
-
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         switch (FRAGMENT_REQUIRED_ID){
             case FRAGMENT_HOT_PROMO:
@@ -166,10 +155,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         int itemId = item.getItemId();
         if(itemId==R.id.hotpromo){
             attachFragment(FRAGMENT_HOT_PROMO);

@@ -9,36 +9,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button Bo1;
-    private Button Bo2;
-    private Button Bo3;
-    private Button Bo4;
-    private Button Bo5;
-    private Button Bo6;
-    private Button Bo7;
-    private Button Bo8;
-    private Button Bo9;
-    private Button Rst;
-    private int numerador;
-    private int numerador1;
-    private int numerador2;
-    private int numerador3;
-    private int numerador4;
-    private int numerador5;
-    private int numerador6;
-    private int numerador7;
-    private int numerador8;
-    private int numerador9;
-    private int numerador1b;
-    private int numerador2b;
-    private int numerador3b;
-    private int numerador4b;
-    private int numerador5b;
-    private int numerador6b;
-    private int numerador7b;
-    private int numerador8b;
-    private int numerador9b;
-
+    private Button Bo1, Bo2, Bo3, Bo4, Bo5, Bo6, Bo7, Bo8, Bo9, Rst;
+    private int numerador, numerador1, numerador2, numerador3, numerador4, numerador5, numerador6,
+    numerador7, numerador8, numerador9, numerador1b, numerador2b, numerador3b, numerador4b,
+    numerador5b, numerador6b, numerador7b, numerador8b, numerador9b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

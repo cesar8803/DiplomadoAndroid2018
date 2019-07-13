@@ -28,7 +28,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import static com.google.android.gms.location.LocationServices.FusedLocationApi;
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
-public class LocationHandler implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class LocationHandler implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient
+        .ConnectionCallbacks {
 
     private GoogleApiClient apiClient;
     private AppCompatActivity activity;
@@ -38,7 +39,8 @@ public class LocationHandler implements GoogleApiClient.OnConnectionFailedListen
 
     public LocationHandler(AppCompatActivity activity){
         this.activity=activity;
-        apiClient= new GoogleApiClient.Builder(this.activity).enableAutoManage(this.activity,this).addConnectionCallbacks(this)
+        apiClient= new GoogleApiClient.Builder(this.activity).enableAutoManage(this.activity,
+                this).addConnectionCallbacks(this)
                 .addApi(LocationServices.API).build();
         //enableAutoManage La gestion de los servicios de gecalizacion se hace en automatico.
         //OnConnectionFailedListener se manda a llamar caundo existe un error
@@ -50,8 +52,6 @@ public class LocationHandler implements GoogleApiClient.OnConnectionFailedListen
         getLatLonLocation();
         enableLocationUpdates();
     }
-
-
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -66,19 +66,22 @@ public class LocationHandler implements GoogleApiClient.OnConnectionFailedListen
     }
 
     public void getLatLonLocation(){
-        if(ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        if(ActivityCompat.checkSelfPermission(activity, Manifest.permission
+                .ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             //Rquerimos permiso
-            ActivityCompat.requestPermissions(activity, new String [] {Manifest.permission.ACCESS_FINE_LOCATION}, PETICION_PERMISO);
+            ActivityCompat.requestPermissions(activity, new String [] {Manifest.permission
+                    .ACCESS_FINE_LOCATION}, PETICION_PERMISO);
         }else{
-            FusedLocationProviderClient fusedLocationProviderClient = getFusedLocationProviderClient(activity);
+            FusedLocationProviderClient fusedLocationProviderClient =
+                    getFusedLocationProviderClient(activity);
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>(){
                 @Override
                 public void onSuccess(Location location){
                         if (location != null) {
                             String lat = String.valueOf(location.getLatitude());
                             String lon = String.valueOf(location.getLongitude());
-
-                            Toast.makeText(activity, "Localizacion LAT" + lat + "Localizacion LON" + lon, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(activity, "Localizacion LAT" + lat + "Localizacion LON"
+                            // + lon, Toast.LENGTH_LONG).show();
                         }
                 }
             });
@@ -100,7 +103,9 @@ public class LocationHandler implements GoogleApiClient.OnConnectionFailedListen
         SettingsClient settingsClient=LocationServices.getSettingsClient(activity);
         settingsClient.checkLocationSettings(locationSettingsRequest);
 
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -121,10 +126,11 @@ public class LocationHandler implements GoogleApiClient.OnConnectionFailedListen
                     String lat = String.valueOf(location.getLatitude());
                     String lon = String.valueOf(location.getLongitude());
                     //String latTrim = lat.substring(0,5);
-                    Toast.makeText(activity,"Localizacion LAT"+ lat + "Localizacion LON"+ lon, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(activity,"Localizacion LAT 2 Clase LocationHnadler"+ lat
+                                    //+ "Localizacion LON"+ lon,
+                            //Toast.LENGTH_LONG).show();
                 }
             }
         }, Looper.myLooper());
-
           }
 }

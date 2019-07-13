@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Metodo para ejecutar el request HTTP mediante Volley
     public void callFourSquareApi(String query){
-        String location = "19.433997"+","+"-99.146006"; //HARDCORE
+        String location = "19.433997"+","+"-99.146006"; //HARDCODE
         RequestQueue queue = Volley.newRequestQueue(this);
         String URL = Uri.parse("https://api.foursquare.com/v2/venues/search").buildUpon()
                 .appendQueryParameter("client_id","HOSIY11XMXHWFADXIPQTF5HRZA3YIWIFGRAOA5NIGXOY3CWI")

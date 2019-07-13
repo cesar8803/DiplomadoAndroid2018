@@ -37,7 +37,7 @@ import mx.mobilestudio.promohunters.model.Promo;
  * A simple {@link Fragment} subclass.
  */
 public class HotPromoFragment extends Fragment implements ValueEventListener {
-
+    private boolean Borrado = false;
     public List<Promo> promolist;
     public ArrayList<Promo> promos = new ArrayList<Promo>();
 
@@ -60,16 +60,14 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
         recyclerView.setLayoutManager(layoutManager);
 
         //aqui manda a llamar ami otra clase
-
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
-
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity()
+                .CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if(isConnected==false){
             getAllSavedPromos();
         }
-
         return viewroot;
         //return inflater.inflate(R.layout.fragment_hot_promo, container, false);
     }
@@ -82,38 +80,51 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
 
         @Override
         public void onDataChange (@NonNull DataSnapshot dataSnapshot){
-             promos.clear();
+            promos.clear();
+            Realm realm = Realm.getDefaultInstance();
+            final RealmResults<Promo> borrarPromos = realm.where(Promo.class).findAll();
+
             for (DataSnapshot child : dataSnapshot.getChildren()) {
                 Promo promo = child.getValue(Promo.class);
                 promos.add(promo);
                 //Toast.makeText(getActivity(),"La promo es: "+promo.getTitle()+"su link es: "+ promo.getLink(),Toast.LENGTH_LONG).show();
-                saveLocalStoragePromo(promo);
+                if(borrarPromos.size()>0 && Borrado==false){
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            borrarPromos.deleteAllFromRealm();
+                        }
+                    });
+                    Borrado=true;
+                }else{
+                    saveLocalStoragePromo(promo);
+                }
             }
                renderRecyclerView();
         }
 
         public void saveLocalStoragePromo(Promo promo){
+        //TODO Resolver ser guardan las promos pero no se borran las eliminadas
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
+            realm.beginTransaction();
         //Todas las actualizaciones se ejecutan between el begintransaction y commitTransaction
-        try{
+            try{
                 Promo localPromo = realm.copyToRealm(promo);
             } catch(Exception e)   {
             Log.v("Error", "Primary Key already exist");
             }
-
             realm.commitTransaction();
         }
 
+        //Si no esta conectado hace esto
         public void getAllSavedPromos(){
         Realm realm = Realm.getDefaultInstance();
             RealmResults<Promo> promos = realm.where(Promo.class).findAll();
             for (Promo currentPromo : promos){
-                Toast.makeText(getActivity(),"Title"+currentPromo.getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"Title"+currentPromo.getTitle(),Toast.LENGTH_LONG).show();
                 this.promos.add(currentPromo);
             }
             renderRecyclerView();
-
         }
 
         @Override
@@ -125,6 +136,4 @@ public class HotPromoFragment extends Fragment implements ValueEventListener {
             PromoHuntersAdaptador promoHuntersAdaptador = new PromoHuntersAdaptador(promos);
             recyclerView.setAdapter(promoHuntersAdaptador);
         }
-
-
 }

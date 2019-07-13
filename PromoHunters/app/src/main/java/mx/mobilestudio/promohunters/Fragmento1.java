@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +35,8 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragmento1 extends Fragment implements View.OnClickListener, OnSuccessListener, OnFailureListener {
+public class Fragmento1 extends Fragment implements View.OnClickListener, OnSuccessListener,
+        OnFailureListener {
     private Button button;
     private ImageButton buttonimage;
     private EditText editTextTitle;
@@ -66,11 +66,10 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
             case SELECT_PHOTO:
                 if(resultCode==RESULT_OK){
                     selectedImage=imageReturnedIntent.getData();
-                    Toast.makeText(getActivity(),"Image Selected"+selectedImage.getLastPathSegment(), Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(getActivity(),"Image Selected"+selectedImage
+                            .getLastPathSegment(), Toast.LENGTH_LONG).show();
                 }
                 break;
-
         }
     }
 
@@ -97,8 +96,6 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
                 progressDialog.incrementProgressBy((int) progress);
             }
         });
-           //Revisar clases anonimas
-        //
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -108,14 +105,15 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
             }
         });
 
+        //Esto corre cunado le doy en Aceptar
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //implementation 'com.google.firebase:firebase-auth:16.0.4' esta linea es necesaria para obtenir mi url
+                //implementation 'com.google.firebase:firebase-auth:16.0.4' esta linea es necesaria
+                // para obtener mi url
+                progressDialog.dismiss();
                 Task<Uri> downloadURL = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                 Toast.makeText(getActivity(),"Imagen guardada.", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-                
                 taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
@@ -123,7 +121,6 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
                         //GlideApp.with(this).load("http://goo.gl/gEgYUd").into(imageView);
                         createNewpromo(uri.toString());
                         Picasso.with(getActivity()).load(uri.toString()).into(buttonimage);
-
                     }
                 });
             }
@@ -151,12 +148,8 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
 
         //Iniciamos el storage de Firebase
         firebaseStorage=FirebaseStorage.getInstance();
-
         //Creamos una referencia al storage
         storageReference=firebaseStorage.getReference();
-
-
-
         return view;
     }
 
@@ -164,11 +157,8 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_accept:
-
-
                 String validateResult = validateForm();
                 if (validateResult.isEmpty()) {
-
                     if (selectedImage != null){
                         uploadImage();
                     }else{
@@ -203,15 +193,12 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
         if(!isValidURL || editTextLink.getText().toString().isEmpty()){
             validateString=validateString+"Debe ser valido el link";
         }
-
-
         if (editTextTitle.getText().toString().isEmpty()){
             validateString=validateString+"Debes escribir un Link valido";
         }
         if (editTextTitle.getText().toString().isEmpty()){
             validateString=validateString+"Debes escribir un Description valido";
         }
-
         return validateString;
     }
 
@@ -225,8 +212,8 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
             newPromo.setImageLink(imageLink);
         }
         String promoID = databaseReference.push().getKey();
-        databaseReference.child("promos").child(promoID).setValue(newPromo).addOnSuccessListener(this).addOnFailureListener(this);
-
+        databaseReference.child("promos").child(promoID).setValue(newPromo)
+                .addOnSuccessListener(this).addOnFailureListener(this);
     }
 
     @Override
@@ -236,7 +223,7 @@ public class Fragmento1 extends Fragment implements View.OnClickListener, OnSucc
 
     @Override
     public void onSuccess(Object o) {
-        Toast.makeText(getActivity(), "Vamos!!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Se ha cargado la promo.", Toast.LENGTH_LONG).show();
         getActivity().finish();
     }
 }
